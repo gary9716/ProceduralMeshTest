@@ -4,15 +4,15 @@ using UnityEngine;
 
 public class ProceduralBase : MonoBehaviour {
 
-    MeshRenderer renderer;
+    MeshRenderer _renderer;
     MeshFilter meshFilter;
     protected Mesh mesh;
 
     private void Start()
     {
-        renderer = GetComponent<MeshRenderer>();
-        if (renderer == null)
-            renderer = gameObject.AddComponent<MeshRenderer>();
+        _renderer = GetComponent<MeshRenderer>();
+        if (_renderer == null)
+            _renderer = gameObject.AddComponent<MeshRenderer>();
 
         meshFilter = GetComponent<MeshFilter>();
         if (meshFilter == null)

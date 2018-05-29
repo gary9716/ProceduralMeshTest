@@ -123,6 +123,7 @@ GameObject:
   - component: {fileID: 176497199}
   - component: {fileID: 176497198}
   - component: {fileID: 176497197}
+  - component: {fileID: 176497200}
   m_Layer: 0
   m_Name: Cube
   m_TagString: Untagged
@@ -177,13 +178,27 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 176497196}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.659902, y: 0.719741, z: 0.37786365}
+  m_LocalRotation: {x: -0.15325874, y: -0.13502106, z: -0.02114373, w: 0.97868997}
+  m_LocalPosition: {x: -7.99, y: 4.22, z: 11.69}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: -17.8, y: -15.71, z: 0}
+--- !u!114 &176497200
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 176497196}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21b57e60eabc4fe42bb8715fae9fbffb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  radius: 10
+  sourceMeshGO: {fileID: 0}
+  numObjs: 189
 --- !u!1 &1255870629
 GameObject:
   m_ObjectHideFlags: 0
