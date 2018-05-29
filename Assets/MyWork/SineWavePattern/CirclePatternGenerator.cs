@@ -50,17 +50,6 @@ public class CirclePatternGenerator : MonoBehaviour {
         
     }
     
-    private void UpdateBuffers()
-    {
-        cachedInstanceCount = instanceCount;
-
-        transformMats = new Matrix4x4[instanceCount];
-        for(int i = 0;i < instanceCount;i++)
-        {
-            transformMats[i] = new Matrix4x4();
-        }
-    }
-
     private void Update()
     {
         if (instanceCount <= 0)
@@ -69,15 +58,13 @@ public class CirclePatternGenerator : MonoBehaviour {
         float angleStep = 360f / instanceCount * Mathf.Deg2Rad;
         int i = 0;
 
-        if (instanceCount != cachedInstanceCount)
-            UpdateBuffers();
-
         Vector3 originalPos = center.position;
         Quaternion originalRot = center.rotation;
 
         Vector3 xBasis = center.right;
         Vector3 yBasis = center.up;
         Vector3 planeNormal = -center.forward;
+        float randVal = Random.value;
         while(i < instanceCount)
         {
             Vector3 translateVec = radius * ( Mathf.Cos(angleStep * i) * xBasis + Mathf.Sin(angleStep * i) * yBasis );
@@ -90,14 +77,16 @@ public class CirclePatternGenerator : MonoBehaviour {
             Vector3 pivot = center.position - Vector3.Scale(diagonal, center.lossyScale) * 0.5f;
             center.RotateAround(pivot, rotAxis, angleInRad * Mathf.Rad2Deg);
             
-            //Set the position/rotation/scale for this matrix
-            transformMats[i].SetTRS(instancePos, center.rotation, Vector3.one);
+            float cosVal = (Mathf.Cos(angleStep * i + Time.realtimeSinceStartup) + 1)/2f;
+            float sinVal = (Mathf.Sin(angleStep * i + Time.realtimeSinceStartup) + 1)/2f;
+            float complexVal = (1 - Mathf.Cos((1 - sinVal) * angleStep * i + Time.realtimeSinceStartup))/2f;
+            matProp.SetColor(shaderColorPropID, new Color(cosVal, sinVal, cosVal, 1));
+            Graphics.DrawMesh(sourceMesh, instancePos, center.rotation, srcMeshMaterial, 0, Camera.main, subMeshIndex, matProp);
             
             center.SetPositionAndRotation(originalPos, originalRot);
             i++;
         }
 
-        Graphics.DrawMeshInstanced(sourceMesh, 0, srcMeshMaterial, transformMats);
     }
 
     private void OnDisable()
